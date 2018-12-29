@@ -1,4 +1,4 @@
-import React ,{Component}from 'react'
+import React ,{Component, Fragment}from 'react'
 import { connect } from 'react-redux'
 import * as headerAciton from './store/actionCreator'
 import {
@@ -6,14 +6,45 @@ Header,
 HeaderWrapper,
 LeftArea,
 Logo,
+
 SearchArea,
 SearchInput,
+SearchTip,
+Triangle,
+SearchTrendItem,
+
 RightArea,
 LoginBtn,
 SignUpBtn,
 WriteBtn} from './style'
 
 class HeaderComponent extends Component{
+
+  // 复杂逻辑用函数 if逻辑
+   getList(){
+    const {focus,trending_list}  = this.props
+
+    return (<Fragment>
+        <Triangle/>
+        <SearchTip>
+            {trending_list.map((item)=>{
+                return < SearchTrendItem>{item}</SearchTrendItem >
+            })}
+        </SearchTip>
+    </Fragment>)
+    // if(focus){
+    //     return (<Fragment>
+    //         <Triangle/>
+    //         <SearchTip>
+    //             {trending_list.map((item)=>{
+    //                 return < SearchTrendItem>{item}</SearchTrendItem >
+    //             })}
+    //         </SearchTip>
+    //     </Fragment>)
+    // }else{
+    //     return null
+    // }
+   }  
 
    render(){
     const {focus, handleInputFocus, handleInputBlur}  = this.props
@@ -29,7 +60,8 @@ class HeaderComponent extends Component{
                             onFocus={handleInputFocus} 
                             onBlur={handleInputBlur}
                             className={focus?'active':''}/>
-                        <i className="iconfont">&#xe62b;</i> 
+                        <i  className={focus?'active iconfont':'iconfont'}>&#xe62b;</i> 
+                        {this.getList()}
                     </SearchArea>
                            
                 </LeftArea>
@@ -48,7 +80,8 @@ class HeaderComponent extends Component{
 
 
 const mapStateToProp = state =>({
-    focus: state.getIn(['header','focus'])
+    focus: state.getIn(['header','focus']),
+    trending_list: state.getIn(['header','trending_list'])
 })
 
 const mapDispatchToProp = dispatch =>({

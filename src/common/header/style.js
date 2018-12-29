@@ -33,11 +33,10 @@ export const SearchArea = styled.div`
         position:absolute;
         right:10px;
         top:5px;
-        background:#969696;
         padding:6px;
-        color:#fff;
         border-radius:50%;
         &.active{
+            color:#fff;
             background:#969696;
         }
     }
@@ -56,7 +55,36 @@ export const SearchInput = styled.input.attrs({
         width:300px;
     }
 `
+export const Triangle = styled.div`
+    position:absolute;
+    width:18px;
+    height:18px;
+    top:54px;
+    left:12px;
+    transform:rotate(225deg);
+    z-index:1;
+    background:#fff
+    box-shadow:2px 2px 2px rgba(0,0,0,.2);
+`
 
+export const SearchTip = styled.div`
+    z-index:0;
+    width:300px;
+    height:100px;
+    box-shadow:0 0 8px rgba(0,0,0,.2);
+    position: absolute;
+    top:60px;
+    background:#fff;
+`
+
+export const SearchTrendItem = styled.div`
+    display:inline-block;
+    padding: 2px 6px;
+    font-size: 12px;
+    color: #787878;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+`
 
 export const RightArea = styled.div`
     float:right
