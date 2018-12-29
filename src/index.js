@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import { GlobalFont } from './static/iconfont/iconfont';
+import {GlobalStyle} from './resetCss'
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const APP = (<div><GlobalStyle/><GlobalFont/><App/></div>)
+
+ReactDOM.render(APP, document.getElementById('root'));
 
