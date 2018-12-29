@@ -75,6 +75,7 @@ export const SearchTip = styled.div`
     position: absolute;
     top:60px;
     background:#fff;
+    padding:14px;
 `
 
 export const SearchTrendItem = styled.div`
@@ -84,6 +85,7 @@ export const SearchTrendItem = styled.div`
     color: #787878;
     border: 1px solid #ddd;
     border-radius: 3px;
+    margin:14px 12px 0 0;
 `
 
 export const RightArea = styled.div`

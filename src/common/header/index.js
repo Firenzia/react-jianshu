@@ -22,32 +22,27 @@ class HeaderComponent extends Component{
 
   // 复杂逻辑用函数 if逻辑
    getList(){
-    const {focus,trending_list}  = this.props
-
-    return (<Fragment>
-        <Triangle/>
-        <SearchTip>
-            {trending_list.map((item)=>{
-                return < SearchTrendItem>{item}</SearchTrendItem >
-            })}
-        </SearchTip>
-    </Fragment>)
-    // if(focus){
-    //     return (<Fragment>
-    //         <Triangle/>
-    //         <SearchTip>
-    //             {trending_list.map((item)=>{
-    //                 return < SearchTrendItem>{item}</SearchTrendItem >
-    //             })}
-    //         </SearchTip>
-    //     </Fragment>)
-    // }else{
-    //     return null
-    // }
+    const {focus,mouseIn, trending_list, trending_list_index, setIndex, handleMouseIn, handleMouseOut}  = this.props
+    if(focus || mouseIn){
+        return (<Fragment>
+            <Triangle/>
+            <SearchTip onMouseEnter={handleMouseIn} onMouseLeave={handleMouseOut}>
+                <div>
+                  <span>热门搜索</span>
+                  <span onClick={()=>{setIndex(trending_list_index+1)}}>换一换</span>
+                </div>
+                {trending_list.slice((trending_list_index-1)*10,trending_list_index*10).map((item, index)=>{
+                    return < SearchTrendItem key={index}>{item}</SearchTrendItem >
+                })}
+            </SearchTip>
+        </Fragment>)
+    }else{
+        return null
+    }
    }  
 
    render(){
-    const {focus, handleInputFocus, handleInputBlur}  = this.props
+    const {focus, trending_list, handleInputFocus, handleInputBlur}  = this.props
     return (<Header>
             <HeaderWrapper>
                 <LeftArea>
@@ -57,7 +52,7 @@ class HeaderComponent extends Component{
 
                     <SearchArea>
                         <SearchInput 
-                            onFocus={handleInputFocus} 
+                            onFocus={ ()=>{handleInputFocus(trending_list)}} 
                             onBlur={handleInputBlur}
                             className={focus?'active':''}/>
                         <i  className={focus?'active iconfont':'iconfont'}>&#xe62b;</i> 
@@ -81,15 +76,30 @@ class HeaderComponent extends Component{
 
 const mapStateToProp = state =>({
     focus: state.getIn(['header','focus']),
-    trending_list: state.getIn(['header','trending_list'])
+    mouseIn :state.getIn(['header','mouseIn']),
+    trending_list: state.getIn(['header','trending_list']),
+    trending_list_index: state.getIn(['header','trending_list_index'])
 })
 
 const mapDispatchToProp = dispatch =>({
-    handleInputFocus() {
+    handleInputFocus(list) {
+        if(list.size=== 0){
+            dispatch(headerAciton.initTrendingList())
+        }
         dispatch(headerAciton.getFocusAction())
+        
     },
     handleInputBlur(){
         dispatch(headerAciton.getBlurAction())
+    },
+    setIndex(index){
+        dispatch(headerAciton.setTrendingListIndex(index))
+    },
+    handleMouseIn(){
+        dispatch(headerAciton.setMouseIn())
+    },
+    handleMouseOut(){
+        dispatch(headerAciton.setMouseOut())
     }
 })
 
