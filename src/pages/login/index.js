@@ -2,6 +2,11 @@ import React, { PureComponent } from 'react'
 import { Redirect } from 'react-router-dom'
 import {setLoginStatus} from './store/actionCreator'
 import {connect} from 'react-redux'
+import {
+    LoginWrapper,
+    LoginBtn,
+    InputArea
+} from './style'
 
 class Login extends PureComponent{
     render(){
@@ -9,11 +14,11 @@ class Login extends PureComponent{
         
         if (!isLogin){
             return (
-                <div>
-                    <input placeholder="account"/>
-                    <input placeholder="pwd"/>
-                    <button onClick={this.props.login}>登陆</button>
-                </div>
+                <LoginWrapper>
+                    <InputArea placeholder="手机或邮箱"/>
+                    <InputArea placeholder="密码"/>
+                    <LoginBtn  onClick={this.props.login}>登陆</LoginBtn>
+                </LoginWrapper>
             )
         }else{
             return (<Redirect to='/'/>)

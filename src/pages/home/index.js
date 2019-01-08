@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react'
+import {connect} from 'react-redux'
 import List from './components/list'
+import {getHomeData} from './store/actionCreator'
 import {
     HomeWrapper,
     HomeLeft,
@@ -18,6 +20,15 @@ class Home extends PureComponent{
                     </HomeRight>
                 </HomeWrapper>)
     }
+    componentDidMount(){
+        this.props.getHomeData()
+    }
 }
 
-export default Home
+const mapDispatchToProps = dispatch => ({
+    getHomeData(){
+        dispatch(getHomeData())
+    }
+})
+
+export default connect(null, mapDispatchToProps)(Home)

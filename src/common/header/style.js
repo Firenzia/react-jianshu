@@ -92,14 +92,14 @@ export const RightArea = styled.div`
     float:right
 `
 
-export const LoginBtn = styled.a`
+export const LoginBtn = styled.div`
     display:inline-block;
     color: #969696;
     font-szie:15px;
     margin: 11px 6px 0 10px;
 `
 
-export const SignUpBtn = styled.a`
+export const SignUpBtn = styled.div`
     display:inline-block;
     width: 80px;
     height: 38px;
