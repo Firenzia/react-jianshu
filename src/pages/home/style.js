@@ -52,5 +52,13 @@ export const ItemInfo = styled.div`
     }
 `
 export const LoadMore = styled.div`
-
+    margin:20px 0;
+    width: 100%;
+    border-radius: 20px;
+    background-color: #a5a5a5;
+    text-align:center;
+    padding:14px 0;
+    :hover{
+        background-color:#c9b3b3
+    }
 `

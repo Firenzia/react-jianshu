@@ -19,10 +19,10 @@ const defaultState = fromJS({
 })
 
 export default (state=defaultState, action)=>{
-    let {data} = action
+    let {value} = action
     switch (action.type){
-        case types.GET_MORE_ARTICLE:
-            return state.set('articleList', state.get('articleList').concat(data))
+        case types.SET_ARTICLE_DATA:
+            return state.merge({'articleList': state.get('articleList').concat(value)})
         default:
             return state;
     }

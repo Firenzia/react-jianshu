@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
 import {getMoreArticle} from '../store/actionCreator'
+import { Link } from 'react-router-dom'
+
 import {
     ItemWrapper,
     ItemInfo,
@@ -13,17 +15,19 @@ class List extends PureComponent{
         return (
             <div>
                 {
-                  articleList.map((item)=>{
+                  articleList.map((item, index)=>{
                     return (
-                        <ItemWrapper key={item.get('id')}>
-                        <ItemInfo>
-                            <div className="title">{item.get('title')}</div>
-                            <p className="cont">
-                                {item.get('cont')}
-                            </p>
-                        </ItemInfo>
-                        <img src={item.get('img_src')} alt=""/>
-                    </ItemWrapper> 
+                        <Link key={index} to={'/detail/'+item.get('id')}>
+                            <ItemWrapper key={item.get('id')}>
+                                <ItemInfo>
+                                    <div className="title">{item.get('title')}</div>
+                                    <p className="cont">
+                                        {item.get('cont')}
+                                    </p>
+                                </ItemInfo>
+                                <img src={item.get('img_src')} alt=""/>
+                            </ItemWrapper> 
+                        </Link>
                     )
                   })
                 }
@@ -41,7 +45,7 @@ const mapStateToProp = state => ({
 
 const mapDispatchToProps = dispatch =>({
   getMoreArticle(){
-    dispatch(getMoreArticle)
+    dispatch(getMoreArticle())
   }
 })
 
