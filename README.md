@@ -7,6 +7,6 @@
 * immutable.js
 
 重点
-* 异步组件 第三方loadable.js
+* 异步组件 第三方库 react-loadable
 * React-transition-grup
 * UI 组件 容器组件
