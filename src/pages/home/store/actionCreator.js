@@ -34,3 +34,8 @@ export const getHomeData = ()=>{
         )
     }
 }
+
+export const setShowScrollStatus = (value)=>({
+    type: types.SET_SHOW_SCROLL_STATUS,
+    value
+})

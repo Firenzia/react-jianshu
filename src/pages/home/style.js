@@ -22,6 +22,17 @@ export const HomeRight = styled.div`
     float: right;
 `
 
+export const BackToTop =styled.div`
+    position:fixed;
+    bottom:200px;
+    right:100px;
+    width:90px;
+    height:90px;
+    line-height:90px;
+    text-align:center;
+    border:1px solid #ccc;
+`
+
 export const  ItemWrapper = styled.div`
     display:flex;
     flex-direction:row;

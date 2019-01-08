@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react'
 import {connect} from 'react-redux'
 import List from './components/list'
-import {getHomeData} from './store/actionCreator'
+import {getHomeData, setShowScrollStatus} from './store/actionCreator'
 import {
     HomeWrapper,
     HomeLeft,
-    HomeRight
+    HomeRight,
+    BackToTop
 } from './style'
 
 class Home extends PureComponent{
@@ -18,17 +19,45 @@ class Home extends PureComponent{
                     <HomeRight>
 
                     </HomeRight>
+                    {
+                        this.props.isShowScroll&&<BackToTop onClick={this.goToTop}>回到顶部</BackToTop>
+                    }
+                    
+
                 </HomeWrapper>)
     }
     componentDidMount(){
         this.props.getHomeData()
+        this.bindEvent()
+    }
+
+    bindEvent(){
+        let {setShowScrollStatus} = this.props
+        window.addEventListener("scroll",()=>{
+            if(document.documentElement.scrollTop<200){
+                setShowScrollStatus(false)
+            }else{
+                setShowScrollStatus(true)
+            }
+        })
+    }
+
+    goToTop(){
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
     }
 }
+
+const mapStateToProps = state => ({
+    isShowScroll : state.getIn(['home','isShowScroll'])
+})
 
 const mapDispatchToProps = dispatch => ({
     getHomeData(){
         dispatch(getHomeData())
+    },
+    setShowScrollStatus(val){
+        dispatch(setShowScrollStatus(val))
     }
 })
 
-export default connect(null, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
