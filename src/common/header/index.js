@@ -1,6 +1,8 @@
 import React ,{Component, Fragment}from 'react'
 import { connect } from 'react-redux'
+import {Link} from 'react-router-dom'
 import * as headerAciton from './store/actionCreator'
+import {setLoginStatus} from '../../pages/login/store/actionCreator'
 import {
 Header,
 HeaderWrapper,
@@ -42,7 +44,7 @@ class HeaderComponent extends Component{
    }  
 
    render(){
-    const {focus, trending_list, handleInputFocus, handleInputBlur}  = this.props
+    const {focus, trending_list, handleInputFocus, handleInputBlur,isLogin}  = this.props
     return (<Header>
             <HeaderWrapper>
                 <LeftArea>
@@ -63,13 +65,19 @@ class HeaderComponent extends Component{
                 
                 <RightArea>
                     <i className="iconfont">&#xe636;</i>
-                    < LoginBtn>登录</LoginBtn>
+                    {/* < LoginBtn>登录</LoginBtn> */}
+                    {this.setLoginBtn(isLogin)}
                     <SignUpBtn>注册</SignUpBtn>
                     <WriteBtn><i className="iconfont">&#xe678;</i>写文章</WriteBtn>
                 </RightArea>
                 
             </HeaderWrapper>
         </Header>)
+   }
+
+   setLoginBtn(status){
+        if(!status)return (<Link to="/login"><LoginBtn>登录</LoginBtn></Link>)
+        else return (< LoginBtn onClick={this.props.logout}>登出</LoginBtn>)
    }
 }
 
@@ -78,7 +86,8 @@ const mapStateToProp = state =>({
     focus: state.getIn(['header','focus']),
     mouseIn :state.getIn(['header','mouseIn']),
     trending_list: state.getIn(['header','trending_list']),
-    trending_list_index: state.getIn(['header','trending_list_index'])
+    trending_list_index: state.getIn(['header','trending_list_index']),
+    isLogin: state.getIn(['login','login'])
 })
 
 const mapDispatchToProp = dispatch =>({
@@ -100,6 +109,9 @@ const mapDispatchToProp = dispatch =>({
     },
     handleMouseOut(){
         dispatch(headerAciton.setMouseOut())
+    },
+    logout(){
+        dispatch(setLoginStatus(false))
     }
 })
 
