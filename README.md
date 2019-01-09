@@ -12,21 +12,7 @@
 * UI 组件 容器组件
 
 ## 代码结构
-├─common
-│  └─header
-│      └─store
-├─pages
-│  ├─detail
-│  │  └─store
-│  ├─home
-│  │  ├─components
-│  │  └─store
-│  └─login
-│      └─store
-├─static
-│  ├─iconfont
-│  └─img
-└─store
+![avatar](/doc/structure.png)
 
 ## 设计
 ![avatar](/doc/design.png)
