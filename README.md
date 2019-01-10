@@ -1,3 +1,10 @@
+## 项目描述
+使用redux创建store管理全局数据，组件为容器组件，通过'react-redux'提供的connect方法与store连接，组件因此可以获取store中的state, 也可以向store派发action。
+在action和store之间使用了中间件'redux-thunk'，因此派发action的时候可以做异步操作。store的reducer接收到action后更改state, 组件因state更新被更新，刷新UI。
+
+模块化实践：
+每个组件有自己的store, 处理自己的types/action/reducer， 全部组件的reducer通过combineReducers进行合并。
+
 ## 技术栈
 * react
 * redux/ react-redux
