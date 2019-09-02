@@ -76,7 +76,7 @@ export const SearchTip = styled.div`
     top:60px;
     background:#fff;
     padding:14px;
-`6
+`
 
 export const SearchTrendItem = styled.div`
     display:inline-block;

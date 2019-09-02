@@ -94,7 +94,7 @@ const mapDispatchToProp = dispatch =>({
     handleInputFocus(list) {
         if(list.size=== 0){
             dispatch(headerAciton.initTrendingList())
-        }
+        } 
         dispatch(headerAciton.getFocusAction())
         
     },
